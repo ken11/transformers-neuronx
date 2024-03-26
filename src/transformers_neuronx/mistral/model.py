@@ -39,6 +39,10 @@ class MistralForSampling(base.NeuronModelBase):
         self.context_hook = None
         self.config = config
         self.neuron_config = neuron_config if neuron_config else NeuronConfig()
+
+        if context_length_estimate is None:
+            context_length_estimate = n_positions
+
         if context_unroll is None:
             context_unroll = config.num_hidden_layers
         self.context_unroll = context_unroll
