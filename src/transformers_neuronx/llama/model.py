@@ -43,6 +43,9 @@ class LlamaForSampling(base.NeuronModelBase):
         self.layers_after_partition = self.neuron_config.auto_layer_partition(config.num_hidden_layers)
         self.prefixed_length = prefixed_length
 
+        if context_length_estimate is None:
+            context_length_estimate = n_positions
+
         if context_unroll is None:
             context_unroll = len(self.layers_after_partition)
         self.context_unroll = context_unroll
